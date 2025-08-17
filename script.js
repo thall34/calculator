@@ -29,32 +29,40 @@ var num1 = ""
 var num2 = ""
 var operator = ""
 
+function error () {
+    display.innerHTML = "ERROR";
+}
+
 function addition (num1, num2) {
     let numbers = display.innerHTML.split ("+")
-    let num1 = parseInt (numbers [0]);
-    let num2 = parseInt (numbers [1]);
+    num1 = parseInt (numbers [0]);
+    num2 = parseInt (numbers [1]);
     display.innerHTML = num1 + num2;
 };
 
 function subtraction (num1, num2) {
     let numbers = display.innerHTML.split ("-")
-    let num1 = parseInt (numbers [0]);
-    let num2 = parseInt (numbers [1]);
+    num1 = parseInt (numbers [0]);
+    num2 = parseInt (numbers [1]);
     display.innerHTML = num1 - num2;
 };
 
 function multiplication (num1, num2) {
     let numbers = display.innerHTML.split ("*")
-    let num1 = parseInt (numbers [0]);
-    let num2 = parseInt (numbers [1]);
+    num1 = parseInt (numbers [0]);
+    num2 = parseInt (numbers [1]);
     display.innerHTML = num1 * num2;
 };
 
 function division (num1, num2) {
     let numbers = display.innerHTML.split ("/")
-    let num1 = parseInt (numbers [0]);
-    let num2 = parseInt (numbers [1]);
+    num1 = parseInt (numbers [0]);
+    num2 = parseInt (numbers [1]);
+    if (num2 === 0) {
+        error ();
+    } else {
     display.innerHTML = num1 / num2;
+    }
 };
 
 function operate (num1, num2, operator) {
@@ -115,6 +123,9 @@ divide.addEventListener ("click", () => {
 
 clear.addEventListener ("click", () => {
     display.innerHTML = defaultState;
+    num1 = ""
+    num2 = ""
+    operator = ""
 });
 
 // click event to run appropriate operation based on user input
