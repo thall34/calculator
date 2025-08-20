@@ -6,6 +6,7 @@ body {
 	padding: 0;
 	min-height: 100vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	font-family: Arial, Helvetica, sans-serif;
@@ -20,7 +21,15 @@ button {
 	border-color: #000000;
 	height: 100%;
 	width: 25%;
-	font-size: 300%;
+	font-size: 250%;
+}
+
+#description {
+	padding: 50px;
+}
+
+.title {
+	text-align: center;
 }
 
 #calculator {
@@ -46,10 +55,12 @@ button {
 }
 
 #display-screen {
-	padding-right: 5%;
-	padding-bottom: 3%;
-	font-size: 500%;
-	max-width: 100%;
+	display: inline-block;
+	padding: 5%;
+	font-size: 300%;
+	width: max-content;
+	word-wrap: break-word;
+	word-break: break-all;
 }
 
 #buttons {

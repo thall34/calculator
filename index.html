@@ -8,6 +8,23 @@
 	<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+	<div id="description">
+		<div class="title">
+			<h1>Basic Calculator</h1>
+			<p>Thank you for deciding to check out my basic calculator program. A few things to know beforehand...</p>
+		</div>
+		<div class="description-text">
+			<ol>
+				<li>This is a basic calculator, so BEDMAS has not been taken into account</li>
+				<li>The numbers will wrap onto extra lines if you add numbers past the edge of the screen</li>
+				<li>If you use decimals, the answer will be rounded to the nearest tenth</li>
+				<li>Dividing by 0 will give an error, to reset use the AC button</li>
+				<li>If you type something you don't want, hit the ⌫ button and it will erase one character at a time</li>
+				<li>If you type in two operators in a row, it will replace the old one with the new one</li>
+				<li>If you type in a second operator after having a full equation, it will calculate and then add the new operator</li>
+			</ol>
+		</div>
+	</div>
 	<div id="calculator">
 		<div id="display">
 			<div id="display-screen"></div>
@@ -38,7 +55,7 @@
 				<button type="button" id="add" class="right operators">+</button>
 			</div>
 			<div class="row">
-				<button type="button" id="zero" class="wide number">0</button>
+				<button type="button" id="zero" class="wide">0</button>
 				<button type="button" id="decimal">.</button>
 				<button type="button" id="equal" class="right">=</button>
 			</div>

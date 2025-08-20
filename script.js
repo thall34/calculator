@@ -1,6 +1,7 @@
 // variable for numbers
 
 const numbers = document.querySelectorAll(".number");
+const zero = document.getElementById("zero");
 
 // variables for operators
 
@@ -19,11 +20,12 @@ const decimal = document.getElementById("decimal");
 var num1 = "0";
 var num2 = "";
 var operator = "";
-var counter = "0"
+var counter = "0";
 
-// variable to get display screen
+// variable to get display screen and variable for max number length
 
 const display = document.getElementById("display-screen");
+const maxLength = 4;
 displayUpdate ();
 
 // simple function to display error on the display 
@@ -111,7 +113,7 @@ function operate (a, b, op) {
     };
 };
 
-// function to update display value when any number or operator button is hit
+// basic function to update display when anything but the number variables are being updated
 
 function displayUpdate () {
     display.innerHTML = num1 + operator + num2;
@@ -139,16 +141,46 @@ numbers.forEach((number) => {
         let value = number.innerHTML;
         if (num1 === "ERROR") {
             ;
+        } else if (operator !== "" && num2 === "0") {
+            ;
         } else if (operator !== "") {
             num2 += value;
+            counter++;
         } else if (counter === "0") {
             num1 = value;
+            counter++;
         } else {
             num1 += value;
+            counter++;
         };
-        counter++;
         displayUpdate ();
     });
+});
+
+// special click event for zero button
+
+zero.addEventListener ("click", () => {
+    let value = zero.innerHTML;
+    if (num1 === "ERROR") {
+        ;
+    } else if (operator !== "" && num2 === "") {
+        num2 = value;
+        counter++;
+    } else if (operator !== "" && num2 !== "0") {
+        num2 += value;
+        counter++;
+    } else if (operator !== "" && num2 === "0") {
+        ;
+    } else if (counter === "0" && num1 !== "0") {
+        num1 = value;
+        counter++;
+    } else if (num1 === "0") {
+        ;
+    } else {
+        num1 += value;
+        counter++;
+    };
+    displayUpdate ();
 });
 
 // click events for all operator buttons
@@ -160,13 +192,15 @@ operators.forEach((sign) => {
             ;
         } else if (operator !== "" && num2 === "") {
             operator = symbol;
+            counter++;
         } else if (operator !== "") {
             operate (num1, num2, operator);
             operator = symbol;
+            counter++;
         } else {
             operator = symbol;
+            counter++;
         };
-        counter++;
         displayUpdate ();                 
     });
 });
@@ -199,7 +233,7 @@ decimal.addEventListener ("click", () => {
             } else {
                 num1 += ".";
                 counter++;
-                displayUpdate();
+                displayUpdate ();
             }
             break;
         case false:
@@ -248,19 +282,21 @@ backspace.addEventListener ("click", () => {
     };
 });
 
+// click event for plus minus button that will change the active integer from positive to negative or vice versa
+
 plusMinus.addEventListener ("click", () => {
     switch (operator === "") {
         case true:
             if (num1.includes("-") == true) {
                 num1 = num1.replace("-", "")
                 counter++;
-                displayUpdate();
+                displayUpdate ();
             } else if (num1 === "0") {
                 ;
             } else {
                 num1 = "-" + num1;
                 counter++;
-                displayUpdate();
+                displayUpdate ();
             }
             break;
         case false:

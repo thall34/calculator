@@ -32,6 +32,6 @@ Added extra if statement so if you type in a second operator before putting in a
 Added decimal button that can add one decimal number per number on each side of the operator
 Added a backspace button that will delete the last input
 Added a +/i button that will convert the active number from + to -
-
-KNOWN BUGS
-Need to figure out how to limit the max character length of the screen or have it wrap
+Made 0 it's own click event that looks for if 0 is already in place and won't output if it is
+Added CSS styling to display so that the numbers will wrap to fill the screen in two rows
+Added description in HTML to explain the shortfalls of the basic calculator program
