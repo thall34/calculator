@@ -31,6 +31,7 @@ Re-configured the equal button click event to only do operation when all the ope
 Added extra if statement so if you type in a second operator before putting in a second number, it replaces the operator
 Added decimal button that can add one decimal number per number on each side of the operator
 Added a backspace button that will delete the last input
+Added a +/i button that will convert the active number from + to -
 
 KNOWN BUGS
 Need to figure out how to limit the max character length of the screen or have it wrap

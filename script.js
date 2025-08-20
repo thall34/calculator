@@ -252,7 +252,7 @@ plusMinus.addEventListener ("click", () => {
     switch (operator === "") {
         case true:
             if (num1.includes("-") == true) {
-                num1.replace("-", "")
+                num1 = num1.replace("-", "")
                 counter++;
                 displayUpdate();
             } else if (num1 === "0") {
@@ -265,7 +265,7 @@ plusMinus.addEventListener ("click", () => {
             break;
         case false:
             if (num2.includes("-") == true) {
-                num2.replace("-", "");
+                num2 = num2.replace("-", "");
                 counter++;
                 displayUpdate ();
             } else if (num2 === "") {
