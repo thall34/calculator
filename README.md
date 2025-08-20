@@ -13,13 +13,25 @@ Changed percent button to backspace button
 Created if statements so that if a second operator is typed in, it will perform the operation on the first two numbers first, then add the current operator
 Created values in the operation functions to round the answers to the nearest one decimal point
 
-NEED TO FIGURE OUT HOW TO ASSIGN NUM 1 AND NUM 2 EARLIER - potentially
-
-Work on what happens if the = button is pressed before typing in both numbers and an operator
-Work on inputting multiple operators in a row not doing anything except display the last operator input
-Work on when a new digit is typed in after getting a result, that it clears the old result and starts a new number
+Aug 20 - Update 2.0
+Combined operators into an array constant
+Re-tooled the default variables of the operation variables and added a counter for extra functionality
+Re-tooled the display so that it is now made up of the num1, operator and num2 variables
+Re-configured the error function with the new defaults for operation variables, added call to displayUpdate function
+Re-configured operation functions to have different variable names from num1 and num2
+Also re-configured all operation functions to round to nearest one decimal place if needed, and added call to displayUpdate function
+Changed if statement for operate function to include "x" for multiply and "÷" for divide, so I could use the array and forEach function to assign event listeners easier
+Added displayUpdate function that updates the HTML display screen div
+Added clearDisplay function that resets operation valuables to defaults and calls the displayUpdate function
+Added clearCounter function that resets the counter, this is used to solve the last problem on the Calculator assignment before the extra credit
+Re-tooled the click events for number buttons to update the num1 and num2 variables instead of directly manipulating the HTML
+Added click event forEach loop to quickly assign click events to all the operator buttons
+Updated the clear click event to call clearDisplay and clearCounter functions
+Re-configured the equal button click event to only do operation when all the operation variables are assigned, otherwise it does nothing
+Added extra if statement so if you type in a second operator before putting in a second number, it replaces the operator
 
 Extra credit
 Add a decimal button that can add up to one decimal point on the number, disable the button if a decimal already exists
 Add a backspace button to undo last input
 Add keyboard support
+Either make numbers shrink to fit container div or max length the operation variables (my suggestion)
