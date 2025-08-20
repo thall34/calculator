@@ -21,9 +21,10 @@ var num2 = "";
 var operator = "";
 var counter = "0"
 
-// setting default display for calculator to read 0 and setting variable for display
+// variable to get display screen
 
 const display = document.getElementById("display-screen");
+displayUpdate ();
 
 // simple function to display error on the display 
 
@@ -37,9 +38,9 @@ function error () {
 // functions to do basic math operations
 
 function addition (a, b) {
-    let num1Int = parseInt (a)
-    let num2Int = parseInt (b)
-    let total = (num1Int + num2Int);
+    let num1Int = parseFloat (a)
+    let num2Int = parseFloat (b)
+    let total = num1Int + num2Int;
     if (total % 1 !== 0) {
         num1 = total.toFixed(1);
     } else {
@@ -51,9 +52,9 @@ function addition (a, b) {
 }
 
 function subtraction (a, b) {
-    let num1Int = parseInt (a)
-    let num2Int = parseInt (b)
-    let total = (num1Int - num2Int);
+    let num1Int = parseFloat (a)
+    let num2Int = parseFloat (b)
+    let total = num1Int - num2Int;
     if (total % 1 !== 0) {
         num1 = total.toFixed(1);
     } else {
@@ -65,9 +66,9 @@ function subtraction (a, b) {
 };
 
 function multiplication (a, b) {
-    let num1Int = parseInt (a)
-    let num2Int = parseInt (b)
-    let total = (num1Int * num2Int);
+    let num1Int = parseFloat (a)
+    let num2Int = parseFloat (b)
+    let total = num1Int * num2Int;
     if (total % 1 !== 0) {
         num1 = total.toFixed(1);
     } else {
@@ -79,12 +80,12 @@ function multiplication (a, b) {
 };
 
 function division (a, b) {
-    let num1Int = parseInt (a)
-    let num2Int = parseInt (b)
+    let num1Int = parseFloat (a)
+    let num2Int = parseFloat (b)
     if (num2Int === 0) {
         error ();
     } else {
-    let total = (num1Int / num2Int);
+    let total = num1Int / num2Int;
     if (total % 1 !== 0) {
         num1 = total.toFixed(1);
     } else {
@@ -165,7 +166,7 @@ operators.forEach((sign) => {
         } else {
             operator = symbol;
         };
-        counter++
+        counter++;
         displayUpdate ();                 
     });
 });
@@ -185,5 +186,95 @@ equal.addEventListener ("click", () => {
         clearCounter ();
     } else {
         ;
+    };
+});
+
+// decimal click event that allows one decimal place to be added per number
+
+decimal.addEventListener ("click", () => {
+    switch (operator === "") {
+        case true:
+            if (num1.includes(".") == true) {
+                ;
+            } else {
+                num1 += ".";
+                counter++;
+                displayUpdate();
+            }
+            break;
+        case false:
+            if (num2.includes(".") == true) {
+                ;
+            } else {
+                num2 += ".";
+                counter++;
+                displayUpdate ();
+            }
+            break;
+    };
+});
+
+// backspace click event that allows user to clear their most recent number input
+
+backspace.addEventListener ("click", () => {
+    switch (operator === "") {
+        case true:
+            if (num1.length == 1) {
+                num1 = "0";
+                counter++;
+                displayUpdate ();
+            } else if (num1.length > 1) {
+                num1 = num1.slice(0, -1);
+                counter++;
+                displayUpdate ();
+            }
+            break;
+        case false:
+            displayUpdate ();
+            if (num2 === "") {
+                operator = "";
+                counter++;
+                displayUpdate ();
+            } else if (num2.length == 1) {
+                num2 = "";
+                counter++;
+                displayUpdate ();
+            } else {
+                num2 = num2.slice(0, -1);
+                counter++;
+                displayUpdate ();
+            }
+            break; 
+    };
+});
+
+plusMinus.addEventListener ("click", () => {
+    switch (operator === "") {
+        case true:
+            if (num1.includes("-") == true) {
+                num1.replace("-", "")
+                counter++;
+                displayUpdate();
+            } else if (num1 === "0") {
+                ;
+            } else {
+                num1 = "-" + num1;
+                counter++;
+                displayUpdate();
+            }
+            break;
+        case false:
+            if (num2.includes("-") == true) {
+                num2.replace("-", "");
+                counter++;
+                displayUpdate ();
+            } else if (num2 === "") {
+                ;
+            } else {
+                num2 = "-" + num2;
+                counter++;
+                displayUpdate ();
+            }
+            break;
     };
 });
