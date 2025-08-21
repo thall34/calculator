@@ -35,3 +35,5 @@ Added a +/i button that will convert the active number from + to -
 Made 0 it's own click event that looks for if 0 is already in place and won't output if it is
 Added CSS styling to display so that the numbers will wrap to fill the screen in two rows
 Added description in HTML to explain the shortfalls of the basic calculator program
+Added if statements to decimal, plus/minus and backspace buttons for when the display is Error
+Combined all basic math operations into the operate function using a switch statement

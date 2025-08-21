@@ -25,113 +25,48 @@ var counter = "0";
 // variable to get display screen and variable for max number length
 
 const display = document.getElementById("display-screen");
-const maxLength = 4;
 displayUpdate ();
 
-// simple function to display error on the display 
-
-function error () {
-    num1 = "ERROR";
-    num2 = "";
-    operator = "";
-    displayUpdate ();
-}
-
-// functions to do basic math operations
-
-function addition (a, b) {
-    let num1Int = parseFloat (a)
-    let num2Int = parseFloat (b)
-    let total = num1Int + num2Int;
-    if (total % 1 !== 0) {
-        num1 = total.toFixed(1);
-    } else {
-        num1 = total;
-    };
-    num2 = "";
-    operator = "";
-    displayUpdate ();
-}
-
-function subtraction (a, b) {
-    let num1Int = parseFloat (a)
-    let num2Int = parseFloat (b)
-    let total = num1Int - num2Int;
-    if (total % 1 !== 0) {
-        num1 = total.toFixed(1);
-    } else {
-        num1 = total;
-    };
-    num2 = "";
-    operator = "";
-    displayUpdate ();
-};
-
-function multiplication (a, b) {
-    let num1Int = parseFloat (a)
-    let num2Int = parseFloat (b)
-    let total = num1Int * num2Int;
-    if (total % 1 !== 0) {
-        num1 = total.toFixed(1);
-    } else {
-        num1 = total;
-    };
-    num2 = "";
-    operator = "";
-    displayUpdate ();
-};
-
-function division (a, b) {
-    let num1Int = parseFloat (a)
-    let num2Int = parseFloat (b)
-    if (num2Int === 0) {
-        error ();
-    } else {
-    let total = num1Int / num2Int;
-    if (total % 1 !== 0) {
-        num1 = total.toFixed(1);
-    } else {
-        num1 = total;
-    };
-    num2 = "";
-    operator = "";
-    displayUpdate ();
-    };
-};
-
-// function to check for operator and run the appropriate operation function
+// function to perform all basic math operations
 
 function operate (a, b, op) {
-    if (op === "+") {
-        addition (a, b);
-    } else if (op === "-") {
-        subtraction (a, b);
-    } else if (op === "x") {
-        multiplication (a, b);
-    } else if (op === "÷") {
-        division (a, b);
+    let num1Float = parseFloat (a);
+    let num2Float = parseFloat (b);
+    let total = 0;
+    switch (op) {
+        case "+":
+            total = num1Float + num2Float;
+            break;
+        case "-":
+            total = num1Float - num2Float;
+            break;
+        case "x":
+            total = num1Float * num2Float;
+            break;
+        case "÷":
+            if (num2Float === 0) {
+                total = "ERROR";
+            } else {
+                total = num1Float / num2Float;
+            }
+            break;
     };
+    if (total = "ERROR") {
+        num1 = total;
+    } else if (total % 1 !== 0) {
+        num1 = total.toFixed(1);
+    } else {
+        num1 = total;
+    };
+    num2 = ""
+    operator = ""
+    displayUpdate ();
 };
 
 // basic function to update display when anything but the number variables are being updated
 
 function displayUpdate () {
     display.innerHTML = num1 + operator + num2;
-};
-
-// function that resets display values to defaults
-
-function clearDisplay () {
-    num1 = "0";
-    num2 = "";
-    operator = "";
-    displayUpdate ();   
-};
-
-// function to reset counter variable to 0
-
-function clearCounter () {
-    counter = "0";
 };
 
 // click events for all number buttons
@@ -208,8 +143,11 @@ operators.forEach((sign) => {
 // click event to reset display to default state
 
 clear.addEventListener ("click", () => {
-    clearDisplay ();
-    clearCounter ();
+    num1 = "0";
+    num2 = "";
+    operator = "";
+    displayUpdate ();
+    counter = "0";
 });
 
 // click event for equal button to run operate function
@@ -217,7 +155,7 @@ clear.addEventListener ("click", () => {
 equal.addEventListener ("click", () => {
     if (num1 !== "" && num2 !== "" && operator !== "") {
         operate (num1, num2, operator);
-        clearCounter ();
+        counter = "0"
     } else {
         ;
     };
@@ -226,91 +164,103 @@ equal.addEventListener ("click", () => {
 // decimal click event that allows one decimal place to be added per number
 
 decimal.addEventListener ("click", () => {
-    switch (operator === "") {
-        case true:
-            if (num1.includes(".") == true) {
-                ;
-            } else {
-                num1 += ".";
-                counter++;
-                displayUpdate ();
-            }
-            break;
-        case false:
-            if (num2.includes(".") == true) {
-                ;
-            } else {
-                num2 += ".";
-                counter++;
-                displayUpdate ();
-            }
-            break;
+    if (num1 === "ERROR") {
+        ;
+    } else {
+        switch (operator === "") {
+            case true:
+                if (num1.includes(".") == true) {
+                    ;
+                } else {
+                    num1 += ".";
+                    counter++;
+                    displayUpdate ();
+                }
+                break;
+            case false:
+                if (num2.includes(".") == true) {
+                    ;
+                } else {
+                    num2 += ".";
+                    counter++;
+                    displayUpdate ();
+                }
+                break;
+        };
     };
 });
 
 // backspace click event that allows user to clear their most recent number input
 
 backspace.addEventListener ("click", () => {
-    switch (operator === "") {
-        case true:
-            if (num1.length == 1) {
-                num1 = "0";
-                counter++;
+    if (num1 === "ERROR") {
+        ;
+    } else {
+        switch (operator === "") {
+            case true:
+                if (num1.length == 1) {
+                    num1 = "0";
+                    counter++;
+                    displayUpdate ();
+                } else if (num1.length > 1) {
+                    num1 = num1.slice(0, -1);
+                    counter++;
+                    displayUpdate ();
+                }
+                break;
+            case false:
                 displayUpdate ();
-            } else if (num1.length > 1) {
-                num1 = num1.slice(0, -1);
-                counter++;
-                displayUpdate ();
-            }
-            break;
-        case false:
-            displayUpdate ();
-            if (num2 === "") {
-                operator = "";
-                counter++;
-                displayUpdate ();
-            } else if (num2.length == 1) {
-                num2 = "";
-                counter++;
-                displayUpdate ();
-            } else {
-                num2 = num2.slice(0, -1);
-                counter++;
-                displayUpdate ();
-            }
-            break; 
+                if (num2 === "") {
+                    operator = "";
+                    counter++;
+                    displayUpdate ();
+                } else if (num2.length == 1) {
+                    num2 = "";
+                    counter++;
+                    displayUpdate ();
+                } else {
+                    num2 = num2.slice(0, -1);
+                    counter++;
+                    displayUpdate ();
+                }
+                break; 
+        };
     };
 });
 
 // click event for plus minus button that will change the active integer from positive to negative or vice versa
 
 plusMinus.addEventListener ("click", () => {
-    switch (operator === "") {
-        case true:
-            if (num1.includes("-") == true) {
-                num1 = num1.replace("-", "")
-                counter++;
-                displayUpdate ();
-            } else if (num1 === "0") {
-                ;
-            } else {
-                num1 = "-" + num1;
-                counter++;
-                displayUpdate ();
-            }
-            break;
-        case false:
-            if (num2.includes("-") == true) {
-                num2 = num2.replace("-", "");
-                counter++;
-                displayUpdate ();
-            } else if (num2 === "") {
-                ;
-            } else {
-                num2 = "-" + num2;
-                counter++;
-                displayUpdate ();
-            }
-            break;
+    if (num1 === "ERROR") {
+        ;
+    } else {
+        switch (operator === "") {
+            case true:
+                if (num1.includes("-") == true) {
+                    num1 = num1.replace("-", "")
+                    counter++;
+                    displayUpdate ();
+                } else if (num1 === "0") {
+                    ;
+                } else {
+                    num1 = "-" + num1;
+                    counter++;
+                    displayUpdate ();
+                }
+                break;
+            case false:
+                if (num2.includes("-") == true) {
+                    num2 = num2.replace("-", "");
+                    counter++;
+                    displayUpdate ();
+                } else if (num2 === "") {
+                    ;
+                } else {
+                    num2 = "-" + num2;
+                    counter++;
+                    displayUpdate ();
+                }
+                break;
+        };
     };
 });
