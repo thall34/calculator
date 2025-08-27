@@ -30,12 +30,14 @@ displayUpdate ();
 // function to perform all basic math operations
 
 function operate (a, b, op) {
+    console.log(op)
     let num1Float = parseFloat (a);
     let num2Float = parseFloat (b);
     let total = 0;
     switch (op) {
         case "+":
             total = num1Float + num2Float;
+            console.log(total)
             break;
         case "-":
             total = num1Float - num2Float;
@@ -48,10 +50,10 @@ function operate (a, b, op) {
                 total = "ERROR";
             } else {
                 total = num1Float / num2Float;
-            }
+            };
             break;
     };
-    if (total = "ERROR") {
+    if (total === "ERROR") {
         num1 = total;
     } else if (total % 1 !== 0) {
         num1 = total.toFixed(1);
